@@ -1,0 +1,19 @@
+<form (ngSubmit)="addTable()" #myForm="ngForm">
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Enter Table Name" aria-label="Database Name"
+            aria-describedby="button-addon2" required [(ngModel)]="newTable" name="title" minlength='3' />
+        <div class="input-group-append">
+            <button class="btn btn-outline-success" id="button-addon2" type="submit"
+                [disabled]="!myForm.form.valid || this.isDisabled">Submit</button>
+        </div>
+    </div>
+</form>
+
+<ul class="list-group">
+    <li class="list-group-item" *ngFor="let item of tables; let i = index" [class.active]="i == currentIndex">
+        <span type="button" (click)="setTable(item)">{{ item["table_name"] }}</span>
+        <button type="button" class="close" aria-label="Close" (click)="deleteTable(item)">
+            <span aria-hidden=" true">&times;</span>
+        </button>
+    </li>
+</ul>

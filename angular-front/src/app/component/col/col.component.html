@@ -1,0 +1,26 @@
+<form (ngSubmit)="addCol()" #myForm="ngForm">
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Enter Column Name" aria-label="Database Name"
+            aria-describedby="button-addon2" required [(ngModel)]="newCol" name="title" minlength='3' />
+        <div class="input-group-append">
+            <select class="form-control" id="" required (change)="changeType($event)">
+                <option id="default" value="" disabled selected>Column Type</option>
+                <option value="integer">Number</option>
+                <option value="varchar">Character</option>
+            </select>
+        </div>
+        <div class="input-group-append">
+            <button class="btn btn-outline-success" id="button-addon2" type="submit"
+                [disabled]="!myForm.form.valid || this.isDisabled || !this.type">Submit</button>
+        </div>
+    </div>
+</form>
+
+<ul class=" list-group">
+    <li class="list-group-item" *ngFor="let item of columns; let i = index" [class.active]="i == currentIndex">
+        <span>{{ item["column_name"] }}</span>
+        <button type="button" class="close" aria-label="Close" (click)="deleteColumn(item)">
+            <span aria-hidden=" true">&times;</span>
+        </button>
+    </li>
+</ul>
